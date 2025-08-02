@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yeniden Merhaba</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <style>
+    :root {
+      --radius: 22px;
+      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      --bg: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+      --card: rgba(255,255,255,0.85);
+      --accent: #38bdf8;
+      --accent-dark: #0ea5e9;
+      --accent-light: #e0f2fe;
+      --text: #0a2540;
+      --pill-bg: rgba(56,189,248,0.13);
+      --pill-color: #0ea5e9;
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+      --max-width: 820px;
+      --container-pad: 2.5rem 1.5rem 3rem 1.5rem;
+      font-family: 'Segoe UI', 'Poppins', 'Montserrat', system-ui, sans-serif;
+    }
+    *{box-sizing:border-box;}
+    html, body {
+      margin:0;
+      padding:0;
+      min-height:100vh;
+      width:100vw;
+      height:100vh;
+      color:var(--text);
+      line-height:1.6;
+      background: var(--bg);
+      animation: fadeInBg 1.2s ease;
+      overflow-x: hidden;
+    }
+    body {
+      min-height:100vh;
+      min-width:100vw;
+      position:relative;
+      z-index:1;
+    }
+    @keyframes fadeInBg {
+      from { filter: blur(8px) brightness(0.8); }
+      to { filter: blur(0) brightness(1); }
+    }
+    .container {
+      max-width: var(--max-width);
+      margin:2.5rem auto 0 auto;
+      padding: var(--container-pad);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 40px 0 rgba(56,189,248,0.10);
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(8px) saturate(1.2);
+      border: 1.5px solid #bae6fd;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+    h1 {
+      margin-top:0;
+      font-size:2.6rem;
+      font-weight:800;
+      letter-spacing:-1px;
+      color: var(--accent-dark);
+      text-shadow: 0 2px 12px #bae6fd80;
+      animation: fadeInDown 1s cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes fadeInDown {
+      from { opacity:0; transform: translateY(-40px); }
+      to { opacity:1; transform: translateY(0); }
+    }
+    h2 {
+      color: var(--accent-dark);
+      font-size:1.5rem;
+      font-weight:700;
+      margin-bottom:0.5rem;
+      letter-spacing:-0.5px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding:1.5rem 1.7rem;
+      margin:1.3rem 0;
+      box-shadow: var(--shadow);
+      border: 1px solid #bae6fd;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow var(--transition), transform var(--transition);
+      animation: cardPop 0.8s cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes cardPop {
+      from { opacity:0; transform: scale(0.97) translateY(30px); }
+      to { opacity:1; transform: scale(1) translateY(0); }
+    }
+    .card:hover {
+      box-shadow: 0 12px 48px 0 #38bdf830, 0 2px 8px #bae6fd60;
+      transform: translateY(-4px) scale(1.012);
+    }
+    .btn {
+      display:inline-block;
+      padding:.85rem 1.7rem;
+      background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+      color:#fff;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      text-decoration:none;
+      font-weight:700;
+      font-size:1.1rem;
+      box-shadow: 0 2px 12px #bae6fd80;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+      margin-top: 0.5rem;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 100%);
+      box-shadow: 0 6px 24px #38bdf850;
+      transform: scale(1.04);
+    }
+    .memories {
+      display:grid;
+      gap:1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .gallery {
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top: 0.7rem;
+      justify-content: flex-start;
+    }
+    .gallery img {
+      width:calc(50% - 7px);
+      min-width: 140px;
+      max-width: 220px;
+      border-radius:16px;
+      object-fit:cover;
+      box-shadow: 0 2px 12px #bae6fd80;
+      border: 2px solid #e0f2fe;
+      transition: transform .25s cubic-bezier(.4,2,.6,1), box-shadow .25s;
+      aspect-ratio: 4/5;
+      background: #e0f2fe;
+      animation: fadeInImg 0.7s cubic-bezier(.4,2,.6,1);
+    }
+    .gallery img:hover {
+      transform: scale(1.04) rotate(-2deg);
+      box-shadow: 0 8px 32px #38bdf850;
+      border-color: #38bdf8;
+    }
+    @keyframes fadeInImg {
+      from { opacity:0; transform: scale(0.95); }
+      to { opacity:1; transform: scale(1); }
+    }
+    .small {
+      font-size:.93rem;
+      color:#3b82f6;
+      opacity:0.85;
+      margin-bottom: 0.3rem;
+    }
+    .tag {
+      background: #e0f2fe;
+      padding:4px 12px;
+      border-radius:999px;
+      font-size:.7rem;
+      margin-right:8px;
+      color: #0ea5e9;
+      font-weight:600;
+      letter-spacing:0.5px;
+    }
+    .flex {
+      display:flex;
+      gap:1.2rem;
+      flex-wrap:wrap;
+    }
+    .pill {
+      background: var(--pill-bg);
+      color: var(--pill-color);
+      padding:8px 18px;
+      border-radius:999px;
+      font-size:1rem;
+      margin:6px 6px 0 0;
+      font-weight:600;
+      box-shadow: 0 1px 6px #bae6fd40;
+      display:inline-block;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+    .pill:hover {
+      background: #bae6fd;
+      color: #0a2540;
+      transform: scale(1.07);
+    }
+    .divider {
+      height:1.5px;
+      background:linear-gradient(90deg,#bae6fd 0%,#38bdf8 100%);
+      margin:2.2rem 0;
+      border-radius:2px;
+      opacity:0.7;
+    }
+    /* Animasyonlu arka plan baloncukları */
+    .bg-bubbles {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      min-height:100vh;
+      min-width:100vw;
+      transition: filter .4s;
+      filter: blur(0.5px) brightness(1.05);
+    }
+    .bg-bubbles span {
+      position: absolute;
+      display: block;
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, #bae6fd 0%, #38bdf8 100%);
+      opacity: 0.16;
+      border-radius: 50%;
+      animation: bubbleMove 16s linear infinite;
+      bottom: -60px;
+      filter: blur(0.5px);
+      transition: opacity .4s;
+    }
+    /* Password Screen */
+    .password-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+      text-align: center;
+    }
+    .password-container {
+      background: rgba(255,255,255,0.85);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 400px;
+      width: 100%;
+    }
+    .password-input {
+      width: 100%;
+      padding: 12px 16px;
+      margin: 1rem 0;
+      border: 2px solid #bae6fd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    .password-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .password-hint {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+    }
+    /* Responsive düzenler */
+    @media (max-width: 600px) {
+      :root {
+        --max-width: 98vw;
+        --container-pad: 1.1rem 0.2rem 1.5rem 0.2rem;
+      }
+      .container {
+        margin: 0.7rem auto 0 auto;
+        border-radius: 0.7rem;
+        box-shadow: 0 2px 16px 0 #bae6fd60;
+        padding: var(--container-pad);
+      }
+      h1 {
+        font-size: 1.5rem;
+        padding: 0.2rem 0.1rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+      }
+      .card {
+        padding: 0.9rem 0.5rem;
+        margin: 0.7rem 0;
+        border-radius: 0.7rem;
+      }
+      .memories {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+      .gallery {
+        gap: 7px;
+      }
+      .gallery img {
+        min-width: 90px;
+        max-width: 100vw;
+        width: 100%;
+        border-radius: 0.7rem;
+        aspect-ratio: 4/3;
+      }
+      .btn {
+        font-size: 1rem;
+        padding: 0.7rem 1.1rem;
+        border-radius: 0.7rem;
+      }
+      .pill {
+        font-size: 0.95rem;
+        padding: 7px 12px;
+        margin: 4px 4px 0 0;
+      }
+      .password-container {
+        padding: 1.5rem;
+      }
+    }
+    .bg-bubbles span:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .bg-bubbles span:nth-child(2) { left: 20%; width: 60px; height: 60px; animation-delay: 2s; }
+    .bg-bubbles span:nth-child(3) { left: 35%; width: 30px; height: 30px; animation-delay: 4s; }
+    .bg-bubbles span:nth-child(4) { left: 50%; width: 80px; height: 80px; animation-delay: 1s; }
+    .bg-bubbles span:nth-child(5) { left: 65%; width: 50px; height: 50px; animation-delay: 3s; }
+    .bg-bubbles span:nth-child(6) { left: 80%; width: 70px; height: 70px; animation-delay: 5s; }
+    .bg-bubbles span:nth-child(7) { left: 90%; width: 40px; height: 40px; animation-delay: 7s; }
+    @keyframes bubbleMove {
+      0% { transform: translateY(0) scale(1); opacity:0.18; }
+      70% { opacity:0.28; }
+      100% { transform: translateY(-900px) scale(1.2); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Password Screen -->
+  <div class="password-screen" id="passwordScreen">
+    <div class="password-container">
+      <h1 style="color: var(--accent-dark);">Özel Mesaj</h1>
+      <p>Bu içeriği görüntülemek için şifre girmelisiniz.</p>
+      <div class="password-hint">İpucu: İlk konuşmaya başladığımız tarih (örnek: 01012004)</div>
+      <input type="password" class="password-input" id="passwordInput" placeholder="Şifreyi girin" />
+      <button class="btn" id="passwordSubmit">Giriş Yap</button>
+      <p id="passwordError" style="color: #ef4444; margin-top: 1rem; display: none;">Yanlış şifre! Lütfen tekrar deneyin.</p>
+    </div>
+  </div>
+
+  <!-- Main Content (Hidden until password is entered) -->
+  <div id="mainContent" style="display: none;">
+    <div class="bg-bubbles">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h1>Yeniden Merhaba Çingoş</h1>
+        <p style="font-size:1.18rem; font-weight:500;">Belki de bu satırları okumak istemezsin, ama içimden geçenleri dürüstçe paylaşmak istedim. Geçmişte yaptığım hatalar için gerçekten üzgünüm. Sana karşı hissettiklerimi ve düşüncelerimi açıkça ifade etmek, belki de yeniden bir başlangıç için küçük bir adım atmak istiyorum. Sadece bir merhaba demek, belki de kısa bir sohbet etmek bile bana iyi gelir. Tabii ki, eğer böyle bir şey istemiyorsan ya da bana geri dönmek istemezsen, bunu da anlayışla karşılarım. Karar tamamen senin, saygı duyarım.</p>
+        <p class="small">Bu sayfa tamamen içten bir özür ve samimi bir konuşma isteğiyle hazırlandı. Cevap vermek zorunda değilsin, sadece hissettiklerimi bilmeni istedim.</p>
+      </div>
+
+      <div class="card">
+        <h2>Küçük Anılar</h2>
+        <div class="memories" id="memories">
+          <!-- JS ile eklenecek -->
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Fotoğraflar</h2>
+        <div class="small">Kusura bakma izinsiz fotoğraflarını kullandım ama senden başka birisi göremeyecek şekilde ayarladım.</div>
+        <div class="gallery" id="gallery">
+          <img src="s1.png" alt="Senin gülüşün" title="Senin gülüşün" />
+          <img src="s2.jpg" alt="Birlikte güzel bir anımız" title="Birlikte güzel bir anımız" />
+          <img src="s3.jpg" alt="Güzel bir anımız" title="Güzel bir anımız" />
+          <img src="s4.jpg" alt="Senin gülüşün" title="Senin gülüşün" />
+          <img src="s5.png" alt="Birlikte güzel bir anımız" title="Birlikte güzel bir anımız" />
+          <img src="s6.png" alt="Güzel bir anımız" title="Güzel bir anımız" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Hatalar ve Dersler</h2>
+        <ul style="padding-left:1.2rem;">
+          <li>İkimizin de hataları oldu, ama burada bunları konuşmak istemem.</li>
+          <li>İnanıyorum ki, ikimiz de hatalarımızı düzeltirsek çok daha güzel bir yolumuz olabilir.</li>
+          <li>Sen, ömrümü adayabileceğim kadar değerli birisin.</li>
+          <li>Ben sadece son bir şans istiyorum.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Birlikte Olabilecek Şeyler</h2>
+        <div class="flex">
+          <div class="pill">Bir çay içmek</div>
+          <div class="pill">Kısa bir yürüyüş</div>
+          <div class="pill">Sadece sohbet</div>
+          <div class="pill">Geçmişten gülümseten anıları hatırlamak</div>
+        </div>
+      </div>
+
+      <div class="card" style="text-align:center;">
+        <h2>Yeniden Konuşmak İster Misin?</h2>
+        <p class="small">İstersen buradan direkt mesaj atabilirsin. Cevap verme zorunluluğu yok, sadece "merhaba" demen yeterli.</p>
+        <a href="https://wa.me/905521703860?text=Merhaba,%20sayfana%20baktım%20ve%20merhaba%20demek%20istedim." class="btn" style="margin-top:1.2rem;">Merhaba Deyin</a>
+      </div>
+
+      <div style="text-align:center; margin-top:2rem;">
+        <div class="small">Eğer istemezse bu sayfayı sileceğim; sadece seni hatırladım ve düzgün bir başlangıç yapmak istedim.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Password Check
+    const correctPassword = "04042025";
+    const passwordScreen = document.getElementById("passwordScreen");
+    const mainContent = document.getElementById("mainContent");
+    const passwordInput = document.getElementById("passwordInput");
+    const passwordSubmit = document.getElementById("passwordSubmit");
+    const passwordError = document.getElementById("passwordError");
+
+    passwordSubmit.addEventListener("click", checkPassword);
+    passwordInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        checkPassword();
+      }
+    });
+
+    function checkPassword() {
+      if (passwordInput.value === correctPassword) {
+        passwordScreen.style.display = "none";
+        mainContent.style.display = "block";
+        // Load the rest of the content
+        loadContent();
+      } else {
+        passwordError.style.display = "block";
+        passwordInput.focus();
+      }
+    }
+
+    function loadContent() {
+      // Anılar kartlarını animasyonlu şekilde ekle
+      const memories = [
+        {title:"Mavi Renk", text:"Mavi rengi ne kadar sevdiğini her zaman hissettim. Sana mavi bir şey gösterdiğimde gözlerinin parlaması aklımda."},
+        {title:"Birlikte Oynadığımız Oyunlar", text:"Beraber oynadığımız oyunlar, özellikle Zula'da geçirdiğimiz o eğlenceli anlar hâlâ aklımda. Seninle takım olup gülmek, bazen rekabet etmek ve birlikte vakit geçirmek bana çok iyi gelmişti. O anlarda aramızdaki bağın ne kadar güçlü olduğunu hissettim."},
+        {title:"Türk Kahvesi", text:"Birlikte içtiğimiz Türk kahvelerinin tadı ve sohbetlerimiz hâlâ aklımda."},
+        {title:"Çingoş", text:"Sana 'çingoş' diye hitap etmek bana hep ayrı bir mutluluk verdi. Umarım bu kelimeyi duyunca yüzünde bir tebessüm oluşuyordur."},
+        {title:"Tarih ve Coğrafya", text:"Tarihe ve coğrafyaya olan merakın, bana da yeni şeyler öğrenme isteği kattı."},
+        {title:"İngilizce", text:"İngilizceye olan hâkimiyetin ve kendini geliştirme azmin bana ilham verdi."},
+      ];
+      const memC = document.getElementById("memories");
+      memories.forEach((m, i) => {
+        setTimeout(() => {
+          const d = document.createElement("div");
+          d.className="card";
+          d.style.padding="10px";
+          d.style.background = "linear-gradient(90deg, #e0f2fe 0%, #fff 100%)";
+          d.style.boxShadow = "0 2px 12px #bae6fd80";
+          d.style.transition = "box-shadow .3s, transform .3s";
+          d.innerHTML = `<h3 style=\"margin:6px 0;color:#0ea5e9;font-size:1.15rem;\">${m.title}</h3><p style=\"margin:4px 0;\">${m.text}</p>`;
+          d.onmouseover = () => { d.style.boxShadow = "0 8px 32px #38bdf850"; d.style.transform = "scale(1.03)"; };
+          d.onmouseout = () => { d.style.boxShadow = "0 2px 12px #bae6fd80"; d.style.transform = "scale(1)"; };
+          memC.appendChild(d);
+        }, 200*i);
+      });
+
+      // Mobilde arka plan baloncuklarını biraz daha soluk yap
+      function updateBubblesForMobile() {
+        if(window.innerWidth < 600) {
+          document.querySelectorAll('.bg-bubbles span').forEach(s => s.style.opacity = 0.10);
+        } else {
+          document.querySelectorAll('.bg-bubbles span').forEach(s => s.style.opacity = 0.16);
+        }
+      }
+      window.addEventListener('resize', updateBubblesForMobile);
+      updateBubblesForMobile();
+
+      // İletişim butonu örneği (dilersen dinamik düzenlersin)
+      document.getElementById("contactBtn").href = "mailto:senin@adresin.com?subject=Merhaba&body=Merhaba,%20bir%20şey%20paylaşmak%20istiyorum...";
+    }
+  </script>
+</body>
+</html>
